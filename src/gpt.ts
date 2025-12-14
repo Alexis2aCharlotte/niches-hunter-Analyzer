@@ -22,75 +22,94 @@ function getOpenAIClient(): OpenAI {
 // ============================================
 
 function buildPrompt(draft: NicheDraft, nicheId: string): string {
-  return `Tu es un expert en analyse de marché mobile. À partir des données d'une niche identifiée, génère une analyse complète et détaillée au format JSON.
+  return `You are a mobile market analysis expert. Generate a CONCISE analysis in JSON format.
 
-DONNÉES D'ENTRÉE :
-- Titre de la niche : ${draft.title}
-- Apps identifiées : ${JSON.stringify(draft.apps, null, 2)}
-- Résumé de l'opportunité : ${draft.summary}
+INPUT DATA:
+- Niche title: ${draft.title}
+- Apps identified: ${JSON.stringify(draft.apps, null, 2)}
+- Opportunity summary: ${draft.summary}
 
-GÉNÈRE UN JSON avec cette structure EXACTE. Tous les champs sont OBLIGATOIRES :
+GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentences only:
 
 {
   "id": "${nicheId}",
   "title": "${draft.title}",
-  "category": "[une seule parmi : Education, Entertainment, Health & Fitness, Lifestyle, Productivity, Finance, Social Networking, Games, Photo & Video, Utilities]",
-  "tags": ["[3 tags max en MAJUSCULES]"],
-  "score": [0-100, calculé selon potentiel × 0.4 + faible compétition × 0.3 + timing × 0.3],
-  "opportunity": "[développe le résumé en 2-3 phrases détaillées]",
-  "gap": "[identifie précisément ce qui manque sur le marché actuel]",
-  "move": "[action concrète recommandée pour un developper]",
+  "category": "[ONE of: Education, Entertainment, Health & Fitness, Lifestyle, Productivity, Finance, Social Networking, Games, Photo & Video, Utilities]",
+  "tags": ["TAG1", "TAG2", "TAG3"],
+  "score": [0-100],
+  "opportunity": "[1-2 SHORT sentences max]",
+  "gap": "[1 sentence]",
+  "move": "[1 sentence with concrete action]",
   "stats": {
-    "competition": "[Low/Medium/High]",
-    "potential": "[Medium/High/Very High]",
-    "revenue": "[$XK-$YK]",
-    "market": "[emoji drapeau + code pays du marché principal]",
-    "timeToMVP": "[X-Y weeks]",
-    "difficulty": "[Low/Medium/Medium-High/High]"
+    "competition": "Low|Medium|High",
+    "potential": "Medium|High|Very High",
+    "revenue": "$XK-$YK",
+    "market": "🇫🇷 FR",
+    "timeToMVP": "X-Y weeks",
+    "difficulty": "Low|Medium|Medium-High|High"
   },
   "market_analysis": {
-    "totalMarketSize": "[$X.XB avec description]",
-    "growthRate": "[+XX% CAGR through YYYY]",
-    "targetAudience": "[description démographique précise]",
-    "geographicFocus": ["[liste des pays cibles]"]
+    "totalMarketSize": "$X.XB short description",
+    "growthRate": "+XX% CAGR through YYYY",
+    "targetAudience": "[SHORT description]",
+    "geographicFocus": ["US", "FR", "DE"]
   },
-  "key_learnings": ["[4-6 insights basés sur les données, avec chiffres]"],
-  "improvements": ["[4-6 améliorations concrètes à apporter]"],
+  "key_learnings": [
+    "[SHORT insight with number, 15 words max]",
+    "[SHORT insight with number, 15 words max]",
+    "[SHORT insight with number, 15 words max]",
+    "[SHORT insight with number, 15 words max]",
+    "[SHORT insight with number, 15 words max]",
+    "[SHORT insight with number, 15 words max]"
+  ],
+  "improvements": [
+    "[SHORT improvement, 10 words max]",
+    "[SHORT improvement, 10 words max]",
+    "[SHORT improvement, 10 words max]",
+    "[SHORT improvement, 10 words max]",
+    "[SHORT improvement, 10 words max]",
+    "[SHORT improvement, 10 words max]"
+  ],
   "marketing_strategies": [
-    {"channel": "[canal]", "strategy": "[stratégie détaillée]", "estimatedCost": "[coût estimé]"}
+    {"channel": "Social Media", "strategy": "[1 SHORT sentence]", "estimatedCost": "$X,XXX/month"},
+    {"channel": "Content Marketing", "strategy": "[1 SHORT sentence]", "estimatedCost": "$X,XXX/month"},
+    {"channel": "Partnerships", "strategy": "[1 SHORT sentence]", "estimatedCost": "$X,XXX/month"}
   ],
   "monetization": {
-    "model": "[modèle de monétisation]",
-    "pricing": "[prix recommandé]",
-    "conversionRate": "[taux de conversion attendu]"
+    "model": "Freemium with in-app purchases",
+    "pricing": "$X.XX/month for premium features",
+    "conversionRate": "X-Y%"
   },
-  "tech_stack": ["[4-6 technologies recommandées]"],
-  "risks": ["[3-4 risques majeurs à considérer]"],
+  "tech_stack": ["Tech1", "Tech2", "Tech3", "Tech4"],
+  "risks": [
+    "[SHORT risk, 10 words max]",
+    "[SHORT risk, 10 words max]",
+    "[SHORT risk, 10 words max]",
+    "[SHORT risk, 10 words max]"
+  ],
   "trending": [
     {
-      "name": "[nom de l'app]",
-      "category": "[catégorie]",
-      "growth": "[+XX%]",
-      "description": "[2-3 phrases sur l'app et son succès]",
-      "strongMarket": "[emoji + pays]",
-      "estimatedMRR": "[$XK-$YK]",
-      "keyPoints": ["[3 points forts]"],
-      "weakPoints": ["[3 faiblesses]"]
+      "name": "[app name from input]",
+      "category": "[category]",
+      "growth": "+XX%",
+      "description": "[1 SHORT sentence about the app]",
+      "strongMarket": "🇫🇷 FR",
+      "estimatedMRR": "$XK-$YK",
+      "keyPoints": ["[3 words]", "[3 words]", "[3 words]"],
+      "weakPoints": ["[3 words]", "[3 words]", "[3 words]"]
     }
   ],
   "locked": false,
   "has_premium": true
 }
 
-RÈGLES IMPORTANTES :
-- Réponds UNIQUEMENT avec le JSON, pas de texte avant ou après
-- Réponds en anglais obligatoirement
-- Utilise les données des apps fournies pour remplir la section "trending"
-- Les key_learnings doivent contenir des données chiffrées quand possible
-- Les marketing_strategies doivent être actionnables avec des coûts réalistes
-- Le score doit refléter objectivement l'attractivité de la niche
-- Génère au moins 3 marketing_strategies différentes
-- Génère une entrée "trending" pour CHAQUE app fournie dans les données`;
+CRITICAL RULES:
+- ONLY output valid JSON, no text before or after
+- BE CONCISE - every field should be SHORT and precise
+- Use the apps from input for "trending" section
+- Max 15 words per key_learning
+- Max 10 words per improvement and risk
+- Max 1 sentence per marketing strategy`;
 }
 
 // ============================================

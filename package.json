@@ -1,0 +1,32 @@
+{
+  "name": "niche-analyzer",
+  "version": "1.0.0",
+  "description": "Service Railway qui transforme les niche_drafts en analyses complètes",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "start:cron": "node dist/index.js",
+    "dev": "ts-node src/server.ts",
+    "dev:cron": "ts-node src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["niche", "analyzer", "railway", "supabase"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "openai": "^4.76.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

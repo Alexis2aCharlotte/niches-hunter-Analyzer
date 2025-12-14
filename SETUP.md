@@ -7,7 +7,7 @@
 - [x] Configurer Supabase client
 - [x] Intégrer OpenAI GPT
 - [x] Créer le serveur webhook Express
-- [ ] Push sur GitHub
+- [x] Push sur GitHub ✅ https://github.com/Alexis2aCharlotte/niches-hunter-Analyzer
 
 ### 2. Déploiement Railway
 - [ ] Créer un nouveau projet Railway

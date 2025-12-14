@@ -71,39 +71,29 @@ export async function markDraftAsProcessed(draftId: string): Promise<void> {
 // ============================================
 
 /**
- * Récupère le prochain ID disponible pour une niche
- * Format: "001", "002", etc.
+ * Génère un ID unique pour une niche
+ * Format: "YYYYMMDD-HHMMSS-XXX" pour garantir l'unicité
+ * Ex: "20251214-143052-a1b"
  */
 export async function getNextNicheId(): Promise<string> {
-  const supabase = getSupabaseClient();
+  console.log("🔢 Génération de l'ID de niche...");
 
-  console.log("🔢 Calcul du prochain ID de niche...");
+  const now = new Date();
+  
+  // Format: YYYYMMDD
+  const dateStr = now.toISOString().slice(0, 10).replace(/-/g, "");
+  
+  // Format: HHMMSS
+  const timeStr = now.toISOString().slice(11, 19).replace(/:/g, "");
+  
+  // Random suffix pour éviter les collisions
+  const randomSuffix = Math.random().toString(36).substring(2, 5);
+  
+  const nicheId = `${dateStr}-${timeStr}-${randomSuffix}`;
 
-  const { data, error } = await supabase
-    .from("niches")
-    .select("id")
-    .order("id", { ascending: false })
-    .limit(1);
+  console.log(`✅ ID généré: ${nicheId}`);
 
-  if (error) {
-    throw new Error(`❌ Erreur lors de la récupération du dernier ID: ${error.message}`);
-  }
-
-  let nextId: number;
-
-  if (!data || data.length === 0) {
-    nextId = 1;
-  } else {
-    // Extraire le numéro du dernier ID
-    const lastId = data[0].id;
-    const numericPart = parseInt(lastId, 10);
-    nextId = isNaN(numericPart) ? 1 : numericPart + 1;
-  }
-
-  const formattedId = nextId.toString().padStart(3, "0");
-  console.log(`✅ Prochain ID: ${formattedId}`);
-
-  return formattedId;
+  return nicheId;
 }
 
 /**

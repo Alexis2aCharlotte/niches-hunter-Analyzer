@@ -22,14 +22,14 @@ function getOpenAIClient(): OpenAI {
 // ============================================
 
 function buildPrompt(draft: NicheDraft, nicheId: string): string {
-  return `You are a mobile market analysis expert. Generate a CONCISE analysis in JSON format.
+  return `You are a mobile market analysis expert. Generate analysis in JSON format.
 
 INPUT DATA:
 - Niche title: ${draft.title}
 - Apps identified: ${JSON.stringify(draft.apps, null, 2)}
 - Opportunity summary: ${draft.summary}
 
-GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentences only:
+GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentences:
 
 {
   "id": "${nicheId}",
@@ -37,9 +37,9 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
   "category": "[ONE of: Education, Entertainment, Health & Fitness, Lifestyle, Productivity, Finance, Social Networking, Games, Photo & Video, Utilities]",
   "tags": ["TAG1", "TAG2", "TAG3"],
   "score": [0-100],
-  "opportunity": "[1-2 SHORT sentences max]",
-  "gap": "[1 sentence]",
-  "move": "[1 sentence with concrete action]",
+  "opportunity": "[2-3 sentences: WHO is the target user + WHAT problem they face + WHY now (cite app ranks or market signals from input data)]",
+  "gap": "[2 sentences: WHAT exists today + WHAT is missing that frustrates users]",
+  "move": "[2-3 sentences: SPECIFIC app idea + TARGET audience + KEY differentiator + FIRST market to launch]",
   "stats": {
     "competition": "Low|Medium|High",
     "potential": "Medium|High|Very High",

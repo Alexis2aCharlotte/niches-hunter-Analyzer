@@ -99,6 +99,11 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
       "weakPoints": ["[3 words]", "[3 words]", "[3 words]"]
     }
   ],
+  "aso_optimization": {
+    "primaryKeywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5"],
+    "secondaryKeywords": ["long tail keyword 1", "long tail keyword 2", "long tail keyword 3"],
+    "appNameIdeas": ["AppName Idea 1", "AppName Idea 2", "AppName Idea 3"]
+  },
   "locked": false,
   "has_premium": true
 }
@@ -121,6 +126,13 @@ Be CONSERVATIVE: if unsure, choose Medium or High. Do NOT mark as "Low" if popul
 - Use ONLY the apps provided in the input data for the "trending" array
 - Do NOT add or invent any additional apps
 - If only 1 app is provided in input, include only that 1 app in trending
+
+=== ASO OPTIMIZATION ===
+Generate App Store Optimization suggestions:
+- primaryKeywords: 5 relevant keywords users would search for this type of app (single words or 2-word phrases)
+- secondaryKeywords: 3 long-tail keywords (3-4 word phrases) for less competitive positioning
+- appNameIdeas: 3 creative, memorable app name suggestions that include a primary keyword
+IMPORTANT: These are SUGGESTIONS for the user to validate with ASO tools. Do not invent popularity or difficulty scores.
 
 === OTHER RULES ===
 - ONLY output valid JSON, no text before or after
@@ -254,6 +266,7 @@ function parseGPTResponse(content: string): GPTNicheResponse {
       "tech_stack",
       "risks",
       "trending",
+      "aso_optimization",
     ];
 
     for (const field of requiredFields) {

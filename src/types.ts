@@ -65,6 +65,12 @@ export interface TrendingApp {
   weakPoints: string[];
 }
 
+export interface ASOOptimization {
+  primaryKeywords: string[];
+  secondaryKeywords: string[];
+  appNameIdeas: string[];
+}
+
 export interface Niche {
   id: string;
   title: string;
@@ -83,6 +89,7 @@ export interface Niche {
   tech_stack: string[];
   risks: string[];
   trending: TrendingApp[];
+  aso_optimization: ASOOptimization;
   locked: boolean;
   has_premium: boolean;
   published_at: string;

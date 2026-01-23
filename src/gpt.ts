@@ -39,7 +39,7 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
   "score": [0-100],
   "opportunity": "[2-3 sentences: WHO is the target user + WHAT problem they face + WHY now (cite app ranks or market signals from input data)]",
   "gap": "[2 sentences: WHAT exists today + WHAT is missing that frustrates users]",
-  "move": "[2-3 sentences: SPECIFIC app idea + TARGET audience + KEY differentiator + FIRST market to launch]",
+  "move": "[2-3 sentences: SPECIFIC app idea + TARGET audience + KEY differentiator + RECOMMENDED MARKET (must match stats.market)]",
   "stats": {
     "competition": "Low|Medium|High",
     "potential": "Medium|High|Very High",
@@ -50,9 +50,9 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
   },
   "market_analysis": {
     "totalMarketSize": "$X.XB short description",
-    "growthRate": "+XX% CAGR through YYYY",
+    "growthRate": "+XX%/year",
     "targetAudience": "[SHORT description]",
-    "geographicFocus": ["US", "FR", "DE"]
+    "geographicFocus": ["XX", "YY", "ZZ"]
   },
   "key_learnings": [
     "[SHORT insight with number, 15 words max]",
@@ -89,7 +89,7 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
   ],
   "trending": [
     {
-      "name": "[app name from input]",
+      "name": "[app name]",
       "category": "[category]",
       "growth": "+XX%",
       "description": "[1 SHORT sentence about the app]",
@@ -103,13 +103,35 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
   "has_premium": true
 }
 
-CRITICAL RULES:
+=== GEOGRAPHIC CONSISTENCY (MANDATORY) ===
+The market recommendation MUST be consistent across all fields:
+1. stats.market = the PRIMARY recommended market (e.g., "🇫🇷 FR")
+2. market_analysis.geographicFocus[0] = MUST match stats.market (same country code, e.g., "FR")
+3. The "move" field = MUST mention the same market as stats.market for launch recommendation
+Example: If stats.market is "🇫🇷 FR", then geographicFocus must start with "FR", and move must say "launch in France" (NOT Germany, NOT Italy, NOT any other country)
+
+=== COMPETITION EVALUATION CRITERIA (MANDATORY) ===
+Evaluate competition based on these STRICT criteria:
+- "Low": Less than 3 established apps in this specific niche, emerging market, no dominant player, apps have <100K downloads
+- "Medium": 3-10 established apps, differentiation possible, growing market, some apps with 100K-1M downloads
+- "High": More than 10 established apps, dominant players exist (>1M downloads), saturated market, well-known brands present
+Be CONSERVATIVE: if unsure, choose Medium or High. Do NOT mark as "Low" if popular apps exist in this space.
+
+=== TRENDING APPS (MANDATORY: MINIMUM 4 APPS) ===
+Include at minimum 4 apps in the "trending" array:
+- Include apps from the input data
+- ADD at least 3 additional REAL apps that exist on the App Store in this niche
+- These must be REAL, VERIFIABLE apps (not invented)
+- Focus on apps that are making money in this niche
+- Do NOT invent fictional apps
+
+=== OTHER RULES ===
 - ONLY output valid JSON, no text before or after
 - BE CONCISE - every field should be SHORT and precise
-- Use the apps from input for "trending" section
 - Max 15 words per key_learning
 - Max 10 words per improvement and risk
-- Max 1 sentence per marketing strategy`;
+- Max 1 sentence per marketing strategy
+- growthRate format: "+XX%/year" (not CAGR)`;
 }
 
 // ============================================

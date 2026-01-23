@@ -52,7 +52,7 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
     "totalMarketSize": "$X.XB short description",
     "growthRate": "+XX%/year",
     "targetAudience": "[SHORT description]",
-    "geographicFocus": ["XX", "YY", "ZZ"]
+    "geographicFocus": ["XX"]
   },
   "key_learnings": [
     "[SHORT insight with number, 15 words max]",
@@ -104,11 +104,11 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
 }
 
 === GEOGRAPHIC CONSISTENCY (MANDATORY) ===
-The market recommendation MUST be consistent across all fields:
-1. stats.market = the PRIMARY recommended market (e.g., "🇫🇷 FR")
-2. market_analysis.geographicFocus[0] = MUST match stats.market (same country code, e.g., "FR")
-3. The "move" field = MUST mention the same market as stats.market for launch recommendation
-Example: If stats.market is "🇫🇷 FR", then geographicFocus must start with "FR", and move must say "launch in France" (NOT Germany, NOT Italy, NOT any other country)
+The market recommendation MUST be IDENTICAL across all fields:
+1. stats.market = the recommended market (e.g., "🇫🇷 FR")
+2. market_analysis.geographicFocus = MUST contain ONLY the same country as stats.market (e.g., ["FR"])
+3. The "move" field = MUST mention the same market as stats.market
+Example: If stats.market is "🇫🇷 FR", then geographicFocus must be ["FR"] (NOT ["FR", "GB", "DE"]), and move must say "launch in France"
 
 === COMPETITION EVALUATION CRITERIA (MANDATORY) ===
 Evaluate competition based on these STRICT criteria:

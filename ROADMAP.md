@@ -115,19 +115,11 @@ score = f(market_potential, competition_level, timing, gap_identified)
 
 ---
 
-### 1.5 Enrichir la section Trending Apps
+### 1.5 ~~Enrichir la section Trending Apps~~ (ANNULÉ)
 
-**Problème** : Seulement 1 app affichée (celle de l'input), pas assez de contexte marché
+**Raison** : GPT ne peut pas vérifier si une app existe réellement sur l'App Store. Il invente des noms ou confond des outils web avec des apps mobiles, ce qui détruit la crédibilité.
 
-**Solution** : Demander à GPT d'ajouter minimum 3 apps similaires connues
-
-**Règles pour GPT** :
-- Minimum 3 apps en plus de celles de l'input
-- Apps réelles, vérifiables sur l'App Store
-- Apps qui font de l'argent dans cette niche
-- Ne pas inventer d'apps fictives
-
-**Résultat** : 4+ apps dans trending (1 input + 3 marché minimum)
+**Décision** : Utiliser UNIQUEMENT les apps fournies dans l'input (données réelles de la newsletter).
 
 ---
 

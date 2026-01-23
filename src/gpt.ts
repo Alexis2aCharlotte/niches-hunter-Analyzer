@@ -117,15 +117,10 @@ Evaluate competition based on these STRICT criteria:
 - "High": More than 10 established apps, dominant players exist (>1M downloads), saturated market, well-known brands present
 Be CONSERVATIVE: if unsure, choose Medium or High. Do NOT mark as "Low" if popular apps exist in this space.
 
-=== TRENDING APPS (MANDATORY: MINIMUM 4 MOBILE APPS) ===
-Include at minimum 4 apps in the "trending" array:
-- Include apps from the input data
-- ADD at least 3 additional REAL MOBILE apps in this niche
-- CRITICAL: ONLY include MOBILE APPS downloadable from Apple App Store or Google Play Store
-- DO NOT include web apps, SaaS tools, or websites (e.g., Analisa.io, Pentos, Social Blade are WEB tools, NOT mobile apps - do NOT include them)
-- These must be REAL, VERIFIABLE mobile apps (not invented)
-- Focus on mobile apps that are making money in this niche
-- If unsure whether something is a mobile app, do NOT include it
+=== TRENDING APPS ===
+- Use ONLY the apps provided in the input data for the "trending" array
+- Do NOT add or invent any additional apps
+- If only 1 app is provided in input, include only that 1 app in trending
 
 === OTHER RULES ===
 - ONLY output valid JSON, no text before or after

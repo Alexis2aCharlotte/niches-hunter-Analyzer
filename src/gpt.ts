@@ -44,7 +44,7 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
     "competition": "Low|Medium|High",
     "potential": "Medium|High|Very High",
     "revenue": "$XK-$YK",
-    "market": "🇫🇷 FR",
+    "market": "🏴 XX (flag emoji + country code of the BEST market based on app data analysis)",
     "timeToMVP": "X-Y weeks",
     "difficulty": "Low|Medium|Medium-High|High"
   },
@@ -93,7 +93,7 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
       "category": "[category]",
       "growth": "+XX%",
       "description": "[1 SHORT sentence about the app]",
-      "strongMarket": "🇫🇷 FR",
+      "strongMarket": "🏴 XX (flag emoji + country code where this app performs best)",
       "estimatedMRR": "$XK-$YK",
       "keyPoints": ["[3 words]", "[3 words]", "[3 words]"],
       "weakPoints": ["[3 words]", "[3 words]", "[3 words]"]
@@ -108,12 +108,18 @@ GENERATE JSON with this EXACT structure. BE CONCISE and precise - short sentence
   "has_premium": true
 }
 
+=== BEST MARKET DETERMINATION (MANDATORY) ===
+Analyze the input app data (country rankings, downloads, revenue, growth) to determine which country represents the BEST opportunity for a new app in this niche.
+Consider: where apps in this niche perform best, where demand is highest, where competition is lowest relative to potential.
+Common top markets include US, GB, DE, JP, KR, BR, IN, AU, CA, etc. Pick the one that fits best based on the DATA, not a default.
+Do NOT default to any specific country - base your choice ENTIRELY on the input data analysis.
+
 === GEOGRAPHIC CONSISTENCY (MANDATORY) ===
 The market recommendation MUST be IDENTICAL across all fields:
-1. stats.market = the recommended market (e.g., "🇫🇷 FR")
-2. market_analysis.geographicFocus = MUST contain ONLY the same country as stats.market (e.g., ["FR"])
+1. stats.market = the recommended market (e.g., "🇺🇸 US" or "🇩🇪 DE" or "🇯🇵 JP" etc.)
+2. market_analysis.geographicFocus = MUST contain ONLY the same country as stats.market (e.g., ["US"])
 3. The "move" field = MUST mention the same market as stats.market
-Example: If stats.market is "🇫🇷 FR", then geographicFocus must be ["FR"] (NOT ["FR", "GB", "DE"]), and move must say "launch in France"
+Example: If stats.market is "🇺🇸 US", then geographicFocus must be ["US"] (NOT ["US", "GB", "DE"]), and move must say "launch in the United States"
 
 === COMPETITION EVALUATION CRITERIA (MANDATORY) ===
 Evaluate competition based on these STRICT criteria:
